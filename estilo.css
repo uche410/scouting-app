@@ -1,0 +1,109 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0A2A52;
+    background-image: url('cancha.png'); /* Imagen de la cancha de fondo */
+    background-size: 75%;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    position: relative;
+}
+
+/* Contenedor principal */
+.login-container {
+    text-align: center;
+    color: white;
+    background: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Estilos para el título con icono de balón */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+h1::after {
+    content: '🏀';
+    position: absolute;
+    margin-left: 10px;
+}
+
+/* Ajuste de los inputs */
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Fondo de botones */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+/* Botones */
+.btn {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 48%;
+}
+
+.btn-blue {
+    background-color: #1E90FF;
+    color: white;
+}
+
+.btn-orange {
+    background-color: #FF4500;
+    color: white;
+}
+
+/* Botón de borrar */
+.btn-gray {
+    background-color: #808080;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.btn-gray:hover {
+    background-color: #696969;
+}
+
+/* Imagen del jugador en la esquina */
+.jugador {
+    height: 500px;
+    width: 400px;
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+}
+
+/* Imagen lupa en el centro */
+.logo {
+    position: absolute;
+    bottom: 10px;
+    top:15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+}
