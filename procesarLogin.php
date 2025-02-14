@@ -100,24 +100,5 @@ h1 {
 }
     </style>
     </head>
-    <body>
-        <h1> Procesar Login </h1>
-        <?php
-          $pdo=conetarDB();
-          if($pdo==null){
-              print "ERROR pdo null ";
-          }
-          else{
-              print "Conexion CORRECTA<br>";
-          }
-           $user=recogerValor("user");
-           $pass=recogerValor("pass");
-           if ($user === "error" || $pass === "error" || empty($user) || empty($pass)) {
-    die("ERROR: Usuario o contraseña no proporcionados.<br>");
-}
-           print "Usuario : $user <br>password : $pass <br>";
-           
-           consultaPass($user,$pass);
-        ?>
-    </body>
+    
 </html>
