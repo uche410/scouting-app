@@ -1,41 +1,37 @@
 <?php
-include "conectardb.php";
 session_start();
-   
+require 'conectardb.php';
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $correo = $_POST['correo'];
+    $contrasena = $_POST['contrasena'];
+
+    $stmt = $conn->prepare("SELECT id, nombre, contraseña, tipo FROM usuarios WHERE correo = ?");
+    $stmt->bind_param("s", $correo);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
     
-   
-    
-    function consultaPass($user, $pass) {
-    $pdo = conetarDB();  
-    $consulta = "SELECT * FROM login WHERE username = :param";
-
-    $resul = $pdo->prepare($consulta);
-    if (!$resul) {
-        die("ERROR: Fallo al preparar la consulta SQL.<br>");
-    }
-
-    $ejecucion = $resul->execute(["param" => $user]);
-    if (!$ejecucion) {
-        die("ERROR: Fallo al ejecutar la consulta SQL.<br>");
-    }
-
-    $registro = $resul->fetch(PDO::FETCH_ASSOC);
-    if (!$registro) {
-        die("ERROR: Usuario no encontrado.<br>");
-    }
-
-    if ($pass == $registro["password"]) {
-        $_SESSION['user'] = $user;
-        header("Location: bienvenida.php"); 
-        exit();
+    if ($resultado->num_rows == 1) {
+        $usuario = $resultado->fetch_assoc();
+        if (password_verify($contrasena, $usuario['contraseña'])) {
+            $_SESSION['user_id'] = $usuario['id'];
+            $_SESSION['user_name'] = $usuario['nombre'];
+            $_SESSION['user_tipo'] = $usuario['tipo'];
+            
+            echo "<script>alert('Bienvenido, {$usuario['nombre']}');</script>";
+            echo "<script>window.location.href = 'home.php';</script>";
+            exit();
+        } else {
+            echo "<script>alert('Contraseña incorrecta.'); window.history.back();</script>";
+        }
     } else {
-        die("ERROR: Contraseña incorrecta.<br>");
+        echo "<script>alert('Correo no registrado.'); window.history.back();</script>";
     }
+    $stmt->close();
 }
+$conn->close();
 
 ?>
-
 
 <!DOCTYPE html>
 <html>
